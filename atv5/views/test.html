@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard Bootstrap with Chart.js</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      padding-top: 56px;
+    }
+
+    table, .tableText {
+      font-size: small;
+    }
+
+    .nav-link {
+      color: lightslategray;
+    }
+
+    .nav-link.active {
+      color: #0d6efd;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- nav bar -->
+  <nav class="navbar navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Painel</a>
+    <div class="d-flex justify-content-between col-10">
+      <form class="nav-item">
+        <input class="form-control" type="text" placeholder="Buscar">
+      </form>
+      <div class="nav-item dropdown px-5">
+        <a class="dropdown-toggle btn btn-secondary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+          Mais
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Configurações</a>
+          <a class="dropdown-item" href="#">Mensagens</a>
+          <a class="dropdown-item" href="#">Sair</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- nav lateral -->
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                  <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                </svg>
+                Painel <span class="sr-only" aria-selected="true">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark" viewBox="0 0 16 16">
+                  <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                </svg>
+                Ordens
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+              </svg>
+              Produtos
+            </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+                  <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/>
+                </svg>
+                Clientes
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+                  <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
+                </svg>
+                Relatórios
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Conteúdo principal -->
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex flex-wrap flex-md-nowrap pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Meu Painel</h1>
+        </div>
+
+        <div class="row">
+          <div class="col-md">
+            <div class="card mb-4">
+              <div class="card-header">
+                Clientes
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">345 mil</h5>
+                <p class="card-text">Jan/2023-Jun/2023</p>
+                <p class="card-text text-success">5,7% de aumento</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="card mb-4">
+              <div class="card-header">
+                Receita
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">2,4 milhões</h5>
+                <p class="card-text">Jan/2023-Jun/2023</p>
+                <p class="card-text text-success">2,3% de aumento</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="card mb-4">
+              <div class="card-header">
+                Compras
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">3 milhões</h5>
+                <p class="card-text">Jan/2023-Jun/2023</p>
+                <p class="card-text text-danger">1,3% de decrécsimo</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="card mb-4">
+              <div class="card-header">
+                Táfego
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">64 mil</h5>
+                <p class="card-text">Jan/2023-Jun/2023</p>
+                <p class="card-text text-success">5,4% de aumento</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- grafico -->
+          <div class="col-md">
+            <div class="card">
+              <div class="card-header">
+                Tráfego últimos 6 meses (por mil)
+              </div>
+              <div class="card-body">
+                <canvas id="myChart"></canvas>
+              </div>
+            </div>
+          </div>
+         
+          <div class="col-md">
+            <div class="card">
+              <div class="card-header">
+                Tráfego últimos 6 meses (por mil)
+              </div>
+              <div class="card-body">
+                <table class="table">
+                  <thead>
+                    <th scope="col">Ordem</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Data</th>
+                    <th scope="col"></th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">17371</th>
+                      <td>Produto 1</td>
+                      <td>a@gmail.com</td>
+                      <td>R$63,10</td>
+                      <td>20/06/2023</td>
+                      <td><button type="button" class="btn btn-primary tableText">Detalhes</button></td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">17372</th>
+                      <td>Produto 2</td>
+                      <td>b@gmail.com</td>
+                      <td>R$42,42</td>
+                      <td>20/06/2023</td>
+                      <td><button type="button" class="btn btn-primary tableText">Detalhes</button></td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">17373</th>
+                      <td>Produto 3</td>
+                      <td>c@gmail.com</td>
+                      <td>R$101,01</td>
+                      <td>20/06/2023</td>
+                      <td><button type="button" class="btn btn-primary tableText">Detalhes</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="d-flex">
+                  <button type="button" class="btn btn-secondary flex-grow-1">Todas as transações</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Dados para o gráfico
+    var data = {
+      labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+      datasets: [{
+        label: 'Tráfego',
+        data: [23, 15, 42, 28, 53, 64],
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+        fill: true,
+        tension: 0.3
+      }]
+    };
+
+    // Configurações do gráfico
+    var options = {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    };
+
+    // Criação do gráfico
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: data,
+      options: options
+    });
+  </script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
