@@ -16,14 +16,16 @@ app.get("/", function (req, res) {
 
 app.post("/dados", function (req, res) {
     let data = {
-        nameOutput: req.body.nameInput,
-        addressOutput: req.body.addressInput,
-        phoneOutput: req.body.phoneInput,
-        dateOutput: req.body.dateInput
+        name: req.body.nameInput,
+        address: req.body.addressInput,
+        phone: req.body.phoneInput,
+        date: req.body.dateInput
     }
+
+    let error = data.name == "" || data.address == "" || data.phone == "" || data.date == ""
    
     console.log(data);
-    res.render("dados.html", {data});
+    res.render("dados.html", {data, error});
 });
 
 app.listen(PORT, function () {
