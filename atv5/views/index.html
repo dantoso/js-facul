@@ -10,32 +10,100 @@
     <body>
         <main role="main" class="container-md">
 
-            <h1>Agendamento</h1>
+            <h1 class="pb-4 pt-2">Agendamento</h1>
 
             <form class="mb-3" action="/dados" method="POST">
+                <h3 class="p-2">Dados pessoais</h3>
+
                 <div class="col-md">
                     <div class="p-2">
-                        <label for="nameInput" class="form-label">Nome</label><br>
-                        <input type="text" name="nameInput" id="nameInput" class="form-control">
+                        <label for="name" class="form-label">Nome</label><br>
+                        <input type="text" name="name" id="name" class="form-control">
                     </div>
 
                     <div class="p-2">
-                        <label for="addressInput" class="form-label">Endereco</label><br>
-                        <input type="text" name="addressInput" id="addressInput" class="form-control">
+                        <label for="birthday" class="form-label">Data de nascimento</label><br>
+                        <input type="date" name="birthday" id="birthday" class="form-control">
                     </div>
 
                     <div class="p-2">
-                        <label for="phoneInput" class="form-label">Telefone</label><br>
-                        <input type="text" name="phoneInput" id="phoneInput" class="form-control">
+                        <label for="cpf" class="form-label">CPF</label><br>
+                        <input type="text" name="cpf" id="cpf" class="form-control">
                     </div>
 
                     <div class="p-2">
-                        <label for="dateInput" class="form-label">Data de agendamento</label><br>
-                        <input type="date" name="dateInput" id="dateInput" class="form-control">
+                        <label for="uf" class="form-label">UF</label><br>
+                        <input type="text" name="uf" id="uf" class="form-control">
+                    </div>
+
+                    <div class="p-2">
+                        <label for="cep" class="form-label">CEP</label><br>
+                        <input type="text" name="cep" id="cep" class="form-control">
+                    </div>
+
+                    <div class="p-2">
+                        <label for="address" class="form-label">Endereco</label><br>
+                        <input type="text" name="address" id="address" class="form-control">
+                    </div>
+
+                    <div class="p-2">
+                        <label for="phone" class="form-label">Telefone</label><br>
+                        <input type="text" name="phone" id="phone" class="form-control">
+                    </div>
+
+                    <div class="p-2">
+                        <label for="email" class="form-label">E-mail</label><br>
+                        <input type="text" name="email" id="email" class="form-control">
                     </div>
                 </div>
 
-                <div class="p-2">
+                <h3 class="p-2 pt-2">Dados da consulta</h3>
+
+                <div class="col-md">
+                    <div class="p-2">
+                        <label for="medicalField" class="form-label">Especialidade médica</label><br>
+                        <select class="form-select" aria-label="Default select example" name="medicalField" id="medicalField">
+                            <option value="Cardiologia">Cardiologia</option>
+                            <option value="Dermatologia">Dermatologia</option>
+                        </select>
+                    </div>
+
+                    <div class="p-2">
+                        <label for="date" class="form-label">Data</label><br>
+                        <input type="date" name="date" id="date" class="form-control">
+                    </div>
+                    
+                    <div class="p-2">
+                        <label for="time" class="form-label">Hora</label><br>
+                        <input type="time" name="time" id="time" class="form-control">
+                    </div>
+
+                    <div class="p-2">
+                        <div class="form-label">Medicamentos alérgicos</div><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="antibiotics"
+                                name="antibiotics">
+                            <label class="form-check-label" for="antibiotics">
+                                Antibióticos
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="antiInflamatories"
+                                name="antiInflamatories">
+                            <label class="form-check-label" for="antiInflamatories">
+                                Anti-inflamatórios
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-2">
+                        <label for="info" class="form-label">Informações adicionais</label><br>
+                        <input type="textarea" name="info" id="info" class="form-control">
+                    </div>
+                </div>
+
+                <div class="p-5">
                     <input type="submit" value="Enviar" class="p-2 btn btn-primary btn-lg" onclick="submit()">
                 </div>
                 

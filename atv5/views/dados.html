@@ -9,23 +9,33 @@
 
             <h1>Dados</h1>
 
-            {{#error}}
+            {{#errors}}
             <div class="alert alert-danger" role="alert">
-                Campos vazios encontrados, preencha todos os campos
+                <strong>{{field}}</strong>{{message}}
             </div>
-            {{/error}}
+            {{/errors}}
 
-            {{^error}}
+            {{^errors}}
             <div class="col-md">
                 <div class="p-2" id="name">Nome: {{data.name}}</div>
-
                 <div class="p-2" id="address">Endereco: {{data.address}}</div>
-
                 <div class="p-2" id="phone">Telefone: {{data.phone}}</div>
-
-                <div class="p-2" id="date">Data: {{data.date}}</div>
+                <div class="p-2" id="date">Aniversário: {{data.birthday}}</div>
+                <div class="p-2" id ="cpf">CPF: {{data.cpf}}</div>
+                <div class="p-2" id ="uf">UF:  {{data.uf}}</div>
+                <div class="p-2" id ="cep">CEP: {{data.cep}}</div>
+                <div class="p-2" id ="email">Email: {{data.email}}</div>
             </div>
-            {{/error}}
+
+            <div class="col-md">
+                <div class="p-2" id ="medicalField">Especialidade médica: {{data.medicalField}}</div>
+                <div class="p-2" id ="date">Data: {{data.date}}</div>
+                <div class="p-2" id ="time">Hora: {{data.time}}</div>
+                <div class="p-2" id ="antibiotics">Antibióticos: {{data.antibiotics}}</div>
+                <div class="p-2" id ="antiInflamatories">Anti-inflamatórios: {{data.antiInflamatories}}</div>
+                <div class="p-2" id ="info">Informações adicionais: {{data.info}}</div>
+            </div>
+            {{/errors}}
         </main>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
